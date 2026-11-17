@@ -1,0 +1,18 @@
+# Python / Sanal Ortamlar
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Öğrencinin kendi sunum çalışma notu (GitHub'a gitmesin)
+SUNUM_REHBERI.txt
+
+# İşletim Sistemi / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
