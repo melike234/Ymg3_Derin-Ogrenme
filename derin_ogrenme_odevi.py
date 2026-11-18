@@ -110,7 +110,7 @@ def run_section_3_convolution() -> dict:
     fig.subplots_adjust(right=0.88, top=0.92, hspace=0.38, wspace=0.30)
     cbar_ax = fig.add_axes([0.90, 0.12, 0.025, 0.76])
     fig.colorbar(im, cax=cbar_ax, label="Ağırlık Değeri")
-    fig.savefig(OUTPUT_DIR / "fig1_conv_filters.png", bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / "01_baslangic_filtreleri.png", bbox_inches="tight")
     plt.close(fig)
 
     # Örnek çıkış öznitelik haritalarından ilk 8 tanesini görselleştir
@@ -125,7 +125,7 @@ def run_section_3_convolution() -> dict:
         fontsize=12, fontweight="bold",
     )
     fig_fm.tight_layout()
-    fig_fm.savefig(OUTPUT_DIR / "fig1b_conv_feature_maps.png", bbox_inches="tight")
+    fig_fm.savefig(OUTPUT_DIR / "02_konvolusyon_ozellik_haritalari.png", bbox_inches="tight")
     plt.close(fig_fm)
 
     return {
@@ -222,7 +222,7 @@ def run_section_4_pooling() -> dict:
 
     fig.suptitle("Bölüm 4: 2×2 Max Pooling İşleminin Adım Adım Görselleştirilmesi", fontsize=12.5, fontweight="bold")
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "fig2_max_pooling.png", bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / "03_max_pooling_giris_cikis.png", bbox_inches="tight")
     plt.close(fig)
 
     return {
@@ -290,7 +290,7 @@ def run_section_5_activations() -> dict:
 
     fig.suptitle("Bölüm 5: ReLU ve Softmax Aktivasyon Fonksiyonları", fontsize=12.5, fontweight="bold")
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "fig3_relu_softmax.png", bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / "04_relu_softmax_grafikleri.png", bbox_inches="tight")
     plt.close(fig)
 
     return {
@@ -323,7 +323,7 @@ def save_fashion_mnist_samples(x_train: np.ndarray, y_train: np.ndarray) -> None
         ax.axis("off")
     fig.suptitle("Bölüm 6A: Fashion-MNIST Veri Setinden Sınıf Örnekleri (28×28 Gri Seviye)", fontsize=12, fontweight="bold", y=0.97)
     fig.subplots_adjust(hspace=0.28, wspace=0.12, top=0.86)
-    fig.savefig(OUTPUT_DIR / "fig4_fashion_mnist_samples.png", bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / "05_fashion_mnist_ornekleri.png", bbox_inches="tight")
     plt.close(fig)
 
 
@@ -428,7 +428,7 @@ def plot_baseline_outputs(
 
     fig.suptitle("Bölüm 6D: Temel CNN Modeli (8 Filtre) Eğitim ve Doğrulama Grafikleri", fontsize=12, fontweight="bold")
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "fig5_training_history.png", bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / "06_egitim_dogrulama_grafikleri.png", bbox_inches="tight")
     plt.close(fig)
 
     # Test seti tahminleri ve karışıklık matrisi
@@ -449,7 +449,7 @@ def plot_baseline_outputs(
         ax.axis("off")
     fig_pred.suptitle("Bölüm 6 (Ek): Test Kümesinden İlk 10 Görüntü İçin Model Tahminleri", fontsize=12, fontweight="bold", y=0.97)
     fig_pred.subplots_adjust(hspace=0.38, wspace=0.14, top=0.85)
-    fig_pred.savefig(OUTPUT_DIR / "fig6_test_predictions.png", bbox_inches="tight")
+    fig_pred.savefig(OUTPUT_DIR / "08_ornek_test_tahminleri.png", bbox_inches="tight")
     plt.close(fig_pred)
 
     # Karışıklık matrisi (pure NumPy)
@@ -477,7 +477,7 @@ def plot_baseline_outputs(
             )
     fig_cm.colorbar(im, ax=ax_cm, fraction=0.046, pad=0.04)
     fig_cm.tight_layout()
-    fig_cm.savefig(OUTPUT_DIR / "fig6b_confusion_matrix.png", bbox_inches="tight")
+    fig_cm.savefig(OUTPUT_DIR / "09_karisiklik_matrisi.png", bbox_inches="tight")
     plt.close(fig_cm)
 
     per_class_acc = {
@@ -505,7 +505,7 @@ def plot_baseline_outputs(
     fig_tf.subplots_adjust(right=0.88, top=0.86, hspace=0.38, wspace=0.28)
     cbar_ax_t = fig_tf.add_axes([0.90, 0.14, 0.025, 0.70])
     fig_tf.colorbar(im_t, cax=cbar_ax_t, label="Ağırlık Değeri")
-    fig_tf.savefig(OUTPUT_DIR / "fig5b_trained_filters.png", bbox_inches="tight")
+    fig_tf.savefig(OUTPUT_DIR / "07_egitilmis_filtreler.png", bbox_inches="tight")
     plt.close(fig_tf)
 
     return {
@@ -562,7 +562,7 @@ def plot_experiment_comparison(exp1: dict, exp2: dict) -> None:
 
     fig.suptitle("Bölüm 8: İlk Conv2D Katmanı Filtre Sayısı Deneyi (8 vs 16 Filtre)", fontsize=12.5, fontweight="bold")
     fig.tight_layout()
-    fig.savefig(OUTPUT_DIR / "fig7_experiment_comparison.png", bbox_inches="tight")
+    fig.savefig(OUTPUT_DIR / "10_deney_8_vs_16_karsilastirma.png", bbox_inches="tight")
     plt.close(fig)
 
 
