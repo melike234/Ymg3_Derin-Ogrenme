@@ -9,8 +9,10 @@ uygulamalarını çalıştırır, görselleri 'outputs/' klasörüne kaydeder ve
 
 from __future__ import annotations
 
+import csv
 import io
 import json
+import math
 import os
 import time
 from pathlib import Path
@@ -135,6 +137,8 @@ def run_section_3_convolution() -> dict:
         "biases": np.round(biases, 6).tolist(),
         "weight_min": float(np.min(weights)),
         "weight_max": float(np.max(weights)),
+        "he_normal_theoretical_std": round(math.sqrt(2.0 / 9.0), 6),
+        "he_normal_sample_std": round(float(np.std(weights)), 6),
     }
 
 
@@ -480,10 +484,37 @@ def plot_baseline_outputs(
         CLASS_NAMES_TR[i]: round(float(cm[i, i] / cm[i].sum()), 4)
         for i in range(10)
     }
+
+    # Eğitim sonrası ilk Conv2D katmanının öğrendiği 8 filtrenin görselleştirilmesi
+    w_trained, _ = model.layers[0].get_weights()
+    fig_tf, axes_tf = plt.subplots(2, 4, figsize=(9.5, 4.8))
+    vmax_t = float(np.max(np.abs(w_trained)))
+    for idx, ax in enumerate(axes_tf.flat):
+        k = w_trained[:, :, 0, idx]
+        im_t = ax.imshow(k, cmap="coolwarm", vmin=-vmax_t, vmax=vmax_t)
+        ax.set_title(f"Öğrenilen Filtre #{idx + 1}", fontsize=9.5)
+        ax.set_xticks([0, 1, 2])
+        ax.set_yticks([0, 1, 2])
+        ax.grid(False)
+        for r in range(3):
+            for c in range(3):
+                val = k[r, c]
+                txt_c = "white" if abs(val) > vmax_t * 0.55 else "black"
+                ax.text(c, r, f"{val:.2f}", ha="center", va="center", fontsize=7.5, color=txt_c, fontweight="bold")
+    fig_tf.suptitle("Bölüm 6 (Ek): Eğitim Sonrası İlk Conv2D Katmanının 8 Öğrenilmiş Filtresi (3×3)", fontsize=11.5, fontweight="bold", y=0.98)
+    fig_tf.subplots_adjust(right=0.88, top=0.86, hspace=0.38, wspace=0.28)
+    cbar_ax_t = fig_tf.add_axes([0.90, 0.14, 0.025, 0.70])
+    fig_tf.colorbar(im_t, cax=cbar_ax_t, label="Ağırlık Değeri")
+    fig_tf.savefig(OUTPUT_DIR / "fig5b_trained_filters.png", bbox_inches="tight")
+    plt.close(fig_tf)
+
     return {
         "per_class_accuracy": per_class_acc,
         "correct_predictions": int(np.sum(y_pred == y_test)),
         "total_test_samples": int(len(y_test)),
+        "first_sample_probs": [round(float(v), 4) for v in y_prob[0]],
+        "first_sample_pred": int(y_pred[0]),
+        "first_sample_true": int(y_test[0]),
     }
 
 
@@ -582,6 +613,19 @@ def main() -> None:
     results_path = OUTPUT_DIR / "results.json"
     with open(results_path, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
+
+    csv_path = OUTPUT_DIR / "deney_karsilastirma_tablosu.csv"
+    with open(csv_path, "w", encoding="utf-8-sig", newline="") as cf:
+        writer = csv.writer(cf)
+        writer.writerow(["Ölçüt", "Deney 1 (8 Filtre)", "Deney 2 (16 Filtre)"])
+        writer.writerow(["Filtre sayısı", exp1["first_conv_filters"], exp2["first_conv_filters"]])
+        writer.writerow(["Eğitim doğruluğu", f"{exp1['train_accuracy_final']:.4f}", f"{exp2['train_accuracy_final']:.4f}"])
+        writer.writerow(["Doğrulama doğruluğu", f"{exp1['val_accuracy_final']:.4f}", f"{exp2['val_accuracy_final']:.4f}"])
+        writer.writerow(["Test doğruluğu", f"{exp1['test_accuracy']:.4f}", f"{exp2['test_accuracy']:.4f}"])
+        writer.writerow(["Test kaybı", f"{exp1['test_loss']:.4f}", f"{exp2['test_loss']:.4f}"])
+        writer.writerow(["Toplam parametre", exp1["total_params"], exp2["total_params"]])
+        writer.writerow(["Eğitim süresi (sn)", f"{exp1['training_time_sec']:.2f}", f"{exp2['training_time_sec']:.2f}"])
+
     print(f"\nTüm çıktılar ve grafikler kaydedildi: {OUTPUT_DIR}")
 
 

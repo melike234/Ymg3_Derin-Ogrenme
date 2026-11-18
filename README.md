@@ -14,8 +14,8 @@
 | [`derin_ogrenme_odevi.ipynb`](derin_ogrenme_odevi.ipynb) | Tüm teorik cevapları, çalıştırılmış kod hücrelerini ve grafikleri içeren Jupyter defteri |
 | [`derin_ogrenme_odevi.py`](derin_ogrenme_odevi.py) | Tüm bölümleri çalıştırıp grafik ve JSON çıktıları üreten Python uygulaması |
 | [`Derin_Ogrenme_Odevi_Rapor.docx`](Derin_Ogrenme_Odevi_Rapor.docx) | Tüm teorik cevaplar, görseller, test sonuçları ve değerlendirme bölümü içeren Word raporu |
-| [`Derin_Ogrenme_Odevi_Sunum.pptx`](Derin_Ogrenme_Odevi_Sunum.pptx) | Derste sunum için hazırlanmış 13 slaytlık PowerPoint sunumu (konuşmacı notlarıyla) |
-| [`outputs/`](outputs/) | Yüksek çözünürlüklü deney grafikleri, filtre görselleştirmeleri ve `results.json` |
+| [`Derin_Ogrenme_Odevi_Sunum.pptx`](Derin_Ogrenme_Odevi_Sunum.pptx) | Derste sunum için hazırlanmış PowerPoint sunumu (konuşmacı notlarıyla) |
+| [`outputs/`](outputs/) | Yüksek çözünürlüklü deney grafikleri, filtre görselleştirmeleri, `deney_karsilastirma_tablosu.csv` ve `results.json` |
 
 ---
 
@@ -45,6 +45,8 @@
 
 ![Eğitim ve Doğrulama Grafikleri](outputs/fig5_training_history.png)
 
+![Eğitim Sonrası Öğrenilen 8 Filtre](outputs/fig5b_trained_filters.png)
+
 ### Bölüm 8: Filtre Sayısı Deneyi (8 vs 16 Filtre)
 
 | Ölçüt | Deney 1 (8 Filtre) | Deney 2 (16 Filtre) |
@@ -53,7 +55,7 @@
 | Toplam Parametre Sayısı | `27,562` | `28,794` |
 | Eğitim Doğruluğu (Epoch 5) | `%88.21` | `%88.68` |
 | Test Doğruluğu (`10.000` örnek) | `%87.10` | `%87.53` |
-| Eğitim Süresi (5 Epoch) | `13.53 sn` | `18.99 sn` |
+| Eğitim Süresi (5 Epoch) | `45.86 sn` | `48.48 sn` |
 
 ![Deney Karşılaştırma Grafiği](outputs/fig7_experiment_comparison.png)
 

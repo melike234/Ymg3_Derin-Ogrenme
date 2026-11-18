@@ -58,7 +58,9 @@
       0.0
     ],
     "weight_min": -1.066274642944336,
-    "weight_max": 1.050878643989563
+    "weight_max": 1.050878643989563,
+    "he_normal_theoretical_std": 0.471405,
+    "he_normal_sample_std": 0.519285
   },
   "section_4": {
     "input_shape": [
@@ -176,7 +178,21 @@
       "Bot": 0.906
     },
     "correct_predictions": 8710,
-    "total_test_samples": 10000
+    "total_test_samples": 10000,
+    "first_sample_probs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0158,
+      0.0,
+      0.0938,
+      0.0004,
+      0.89
+    ],
+    "first_sample_pred": 9,
+    "first_sample_true": 9
   },
   "experiment_1_8_filters": {
     "first_conv_filters": 8,
@@ -187,7 +203,7 @@
     "val_loss_final": 0.3391231596469879,
     "test_loss": 0.3607514798641205,
     "test_accuracy": 0.8709999918937683,
-    "training_time_sec": 13.53,
+    "training_time_sec": 45.86,
     "history": {
       "accuracy": [
         0.7698147892951965,
@@ -229,7 +245,7 @@
     "val_loss_final": 0.33274635672569275,
     "test_loss": 0.3485177755355835,
     "test_accuracy": 0.8752999901771545,
-    "training_time_sec": 18.99,
+    "training_time_sec": 48.48,
     "history": {
       "accuracy": [
         0.7807962894439697,
